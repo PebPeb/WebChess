@@ -1,4 +1,6 @@
 
+const BOARD_MAX = 9999
+
 class chessBoard
 {
 	constructor(){
@@ -73,18 +75,23 @@ class chessBoard
 		let X = Math.floor(self.posX / 100)
 		let Y = Math.floor(self.posY / 100)
 		
-		self.gameBoard[self.gridX][self.gridY] = null
-		self.gameBoard[X][Y] = chessboard.currentPiece
-		self.gridX = X
-		self.gridY = Y
-		chessboard.drawBoard()
+		if (self.gameBoard[X][Y] == null) {
+			console.log(chessboard.currentPiece.validMove)
+			self.gameBoard[self.gridX][self.gridY] = null
+			self.gameBoard[X][Y] = chessboard.currentPiece
+			self.gridX = X
+			self.gridY = Y
+			chessboard.drawBoard()
+		}
 	}
 }
 
 class chessPiece
 {
 	constructor() {
-		self.name = ""
+		this.team = null
+		this.name = null
+		this.validMove = null
 	}
 	
 }
@@ -93,6 +100,7 @@ class Pawn extends chessPiece
 {
 	constructor(){
 		super()
+		this.validMove = [[1, 2], [-1, 2], [1, 2]]
 	}
 	
 	draw(){
